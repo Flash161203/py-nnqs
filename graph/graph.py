@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Graph(object):
     """
     Base class for Graph.
