@@ -8,8 +8,8 @@ class Graph(object):
     Graph must have an adjacency list.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.adj_list = None
 
-    def set_adj_list(self, adj_list: List[List[int]]):
+    def set_adj_list(self, adj_list: List[List[int]]) -> None:
         self.adj_list = adj_list
