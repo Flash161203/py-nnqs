@@ -1,3 +1,5 @@
+from typing import List
+
 class Graph(object):
     """
     Base class for Graph.
@@ -9,5 +11,5 @@ class Graph(object):
     def __init__(self):
         self.adj_list = None
 
-    def set_adj_list(self, adj_list):
+    def set_adj_list(self, adj_list: List[List[int]]):
         self.adj_list = adj_list
