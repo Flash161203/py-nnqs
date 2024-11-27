@@ -86,17 +86,17 @@ class LearnerSupervised:
                     else:
                         print(f"Validation - Loss: {val_loss.item()}")
 
-            # Callback updates
-            for callback in callbacks:
-                callback.on_epoch_end(epoch)
+            # # Callback updates
+            # for callback in callbacks:
+            #     callback.on_epoch_end(epoch)
 
         # Final model storage
         self.store_model(epochs, last=True)
 
-        # Handle EnergyCallback (if used)
-        for callback in callbacks:
-            if 'EnergyCallback' in callback.__class__.__name__:
-                self.samples = callback.samples
+        # # Handle EnergyCallback (if used)
+        # for callback in callbacks:
+        #     if 'EnergyCallback' in callback.__class__.__name__:
+        #         self.samples = callback.samples
 
         # Final observables calculation
         self.calculate_observables(epochs)
