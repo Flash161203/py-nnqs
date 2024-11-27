@@ -1,0 +1,6 @@
+torch
+matplotlib
+jupyter
+scipy
+sklearn
+networkx[default]
