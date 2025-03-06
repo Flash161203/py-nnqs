@@ -1,6 +1,8 @@
 from graph import Graph
 from typing import List, Tuple
 
+import numpy as np
+
 
 class Hypercube(Graph):
     """
@@ -22,6 +24,9 @@ class Hypercube(Graph):
         Graph.__init__(self)
         self.length = length
         self.dimension = dimension
+
+        self.dims = [length] * dimension
+
         self.num_points = self.length ** self.dimension
         self.pbc = pbc
         self.next_nearest = next_nearest
@@ -148,6 +153,9 @@ class Hypercube(Graph):
             Convert a given point to a coordinate based on row-major order
         """
         assert point < self.num_points
+
+        # return np.unravel_index(point, self.dim, order='F')
+
         coordinate = []
         for i in reversed(range(self.dimension)):
             v = self.length ** i
@@ -161,6 +169,9 @@ class Hypercube(Graph):
             Convert a given coordinate to a point based on row-major order
         """
         assert len(coordinate) == self.dimension
+
+        # return np.ravel_multi_index(coordinate, self.dim, order='F')
+
         point = 0
         for i in range(self.dimension):
             point += coordinate[i] * (self.length ** i)
