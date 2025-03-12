@@ -17,7 +17,7 @@ class RBMComplex(RBM):
     where a = bv is the visible bias, b = bh is the hidden bias, and H is the number of hidden nodes.
     """
 
-    def __init__(self, num_visible, density=2, initializer=None, use_bias=True, num_expe=None, freeze_pos=None, freeze_pos2=None):
+    def __init__(self, num_visible, density=2, initializer=np.random.randn, use_bias=True, num_expe=None, freeze_pos=None, freeze_pos2=None):
         """
         Construct an RBM model for real positive wavefunction
         Args:

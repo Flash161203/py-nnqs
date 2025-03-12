@@ -14,7 +14,7 @@ class MLPComplexTanh(MLP):
     for complex wavefunction.
     """
 
-    def __init__(self, num_visible, density=2, initializer=None, use_bias=True, num_expe=None, freeze_pos=None):
+    def __init__(self, num_visible, density=2, initializer=np.random.randn, use_bias=True, num_expe=None, freeze_pos=None):
         """
         Args:
             num_visible: number of visible
