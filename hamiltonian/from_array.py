@@ -14,7 +14,7 @@ class FromArray(Hamiltonian):
         """
         """
 
-        Hamiltonian.__init__(graph)
+        super(graph)
 
         self.seed = seed
         # Set the same seed

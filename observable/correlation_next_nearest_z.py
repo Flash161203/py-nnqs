@@ -25,7 +25,7 @@ class CorrelationNNZ(Observable):
 
         self.chain = chain
 
-        Observable.__init__(self.chain.num_points)
+        super(self.chain.num_points)
 
     def get_value_antiferro(self, prob, confs):
         """

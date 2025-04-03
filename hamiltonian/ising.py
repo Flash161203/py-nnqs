@@ -24,7 +24,7 @@ class Ising(Hamiltonian):
             h: magnitude of the external magnetic field along the x-axis
         """
 
-        super().__init__(graph)
+        super(graph)
         self.j = j
         self.h = h
 

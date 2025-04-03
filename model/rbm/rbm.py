@@ -4,7 +4,7 @@ from model.model import Model
 class RBM(Model):
 
     def __init__(self, num_visible: int, density: float = 2.0) -> None:
-        Model.__init__()
+        super()
         self.num_visible = num_visible
         self.density = density
         self.num_hidden = int(self.num_visible * self.density)
