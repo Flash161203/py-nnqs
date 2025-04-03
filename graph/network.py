@@ -17,7 +17,7 @@ class Network(Graph):
             pbc: True for hypercube with periodic boundary conditions or False for hypercube with open boundary conditions
 
         """
-        Graph.__init__(self)
+        Graph.__init__()
         self.network = network
         self.edges = self.network.edges
         self.num_points = len(self.network.nodes)

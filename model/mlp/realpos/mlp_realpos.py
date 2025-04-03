@@ -41,7 +41,7 @@ class MLPRealPos(MLP):
                           and so on.
         """
 
-        MLP.__init__(self, num_visible, num_hidden)
+        MLP.__init__(num_visible, num_hidden)
         self.activation_hidden = getattr(
             nn, activation_hidden.capitalize())() if activation_hidden else None
         self.activation_output = getattr(

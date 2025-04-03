@@ -23,7 +23,7 @@ class CorrelationNZ(Observable):
 
         self.chain = chain
 
-        Observable.__init__(self, self.chain.num_points)
+        Observable.__init__(self.chain.num_points)
 
     def get_value_antiferro(self, prob, confs):
         """

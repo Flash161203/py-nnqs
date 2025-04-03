@@ -22,7 +22,7 @@ class CorrelationZ(Observable):
             d_0 = value of d_0
             d_1 = vale of d_1
         """
-        Observable.__init__(self, num_particles)
+        Observable.__init__(num_particles)
         self.position = position
         self.C_total = None
         self.d_0 = d_0

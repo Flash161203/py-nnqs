@@ -21,7 +21,7 @@ class Hypercube(Graph):
 
         TODO: non-squared hypercube
         """
-        Graph.__init__(self)
+        Graph.__init__()
         self.length = length
         self.dimension = dimension
 
