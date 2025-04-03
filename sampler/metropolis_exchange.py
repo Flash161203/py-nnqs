@@ -12,7 +12,7 @@ class MetropolisExchange(Sampler):
     """
 
     def __init__(self, num_samples, num_steps, total_sz=0):
-        super(num_samples)
+        super.__init__(num_samples)
         self.num_steps = num_steps
         self.total_sz = total_sz
 

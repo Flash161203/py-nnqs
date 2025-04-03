@@ -27,7 +27,7 @@ class RBMComplex(RBM):
             use_bias: use bias or not
             num_expe: number of experiment to determine the seed
         """
-        super(num_visible, density)
+        super.__init__(num_visible, density)
         self.initializer = initializer
         self.use_bias = use_bias
         self.num_expe = num_expe

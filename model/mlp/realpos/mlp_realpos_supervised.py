@@ -33,7 +33,7 @@ class MLPRealPosSupervised(MLP):
                           and so on. (TODO: not yet implemented)
         """
 
-        super(num_visible, num_hidden)
+        super.__init__(num_visible, num_hidden)
         self.num_expe = num_expe
         self.activation_hidden = activation_hidden
         self.activation_output = activation_output

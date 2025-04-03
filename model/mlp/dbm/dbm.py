@@ -25,7 +25,7 @@ class DBM(MLP):
             num_expe: number of experiments to determine the seed.
         """
 
-        super(num_visible, num_hidden)
+        super.__init__(num_visible, num_hidden)
         self.use_bias = use_bias
         self.freeze_layer = freeze_layer
         self.num_expe = num_expe

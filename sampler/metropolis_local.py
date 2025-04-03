@@ -16,7 +16,7 @@ class MetropolisLocal(Sampler):
             num_samples: number of samples
             num_steps: number of steps in Metropolis
         """
-        super(num_samples)
+        super.__init__(num_samples)
         self.num_steps = num_steps
 
     def get_initial_random_samples(self, sample_size, num_samples=None):

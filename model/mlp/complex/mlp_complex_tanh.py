@@ -23,7 +23,7 @@ class MLPComplexTanh(MLP):
             use_bias: use bias or not
             num_expe: number of experiment to determine the seed
         """
-        super(num_visible, [num_visible * density])
+        super.__init__(num_visible, [num_visible * density])
         self.density = density
         self.initializer = initializer
         self.use_bias = use_bias

@@ -21,7 +21,7 @@ class MagnetizationX(Observable):
             d_0 = value of d_0
             d_1 = vale of d_1
         """
-        super(num_particles)
+        super.__init__(num_particles)
         self.value = None
 
     def get_value(self, probs, confs):
