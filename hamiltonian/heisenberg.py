@@ -25,7 +25,7 @@ class Heisenberg(Hamiltonian):
             total_sz: total_sz if we want to restrict the Hilbert space
         """
 
-        super.__init__(graph)
+        super().__init__(graph)
         self.jx = jx
         self.jy = jy
         self.jz = jz

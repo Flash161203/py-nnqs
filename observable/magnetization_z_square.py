@@ -15,7 +15,7 @@ class MagnetizationZSquare(Observable):
         Args:
             num_particles: number of particles                
         """
-        super.__init__(num_particles)
+        super().__init__(num_particles)
         self.dimension = dimension
 
     def get_value_antiferro(self, prob, confs):

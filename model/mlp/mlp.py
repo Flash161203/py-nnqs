@@ -4,7 +4,7 @@ from model.model import Model
 class MLP(Model):
 
     def __init__(self, num_visible, num_hidden=[256]):
-        super.__init__()
+        super().__init__()
         self.num_visible = num_visible
         self.num_hidden = num_hidden
         self.num_layer = len(num_hidden)

@@ -26,7 +26,7 @@ class IsingJ1J2(Hamiltonian):
             j2: magnitude of the next nearest neighbor interaction along z-axis
         """
 
-        super.__init__(graph)
+        super().__init__(graph)
         self.j1 = j1
         self.h = h
         self.j2 = j2
