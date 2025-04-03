@@ -1,10 +1,9 @@
 from model.model import Model
-from typing import Number
 
 
 class RBM(Model):
 
-    def __init__(self, num_visible: int, density: Number = 2) -> None:
+    def __init__(self, num_visible: int, density: float = 2.0) -> None:
         Model.__init__(self)
         self.num_visible = num_visible
         self.density = density
