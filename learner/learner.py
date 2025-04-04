@@ -188,7 +188,7 @@ class Learner:
                 elocs, oloc_sum)
 
             print('Epoch: %d, oloc_sum: %.6f, energy: %.4f, std: %.4f, std/mean: %.4f, relerror: %.5f' % (
-                epoch, np.mean(oloc_sum.cpu().numpy()), energy, energy_std, energy_std / np.abs(energy), rel_error), end='')
+                epoch, np.mean(oloc_sum.detach().cpu().numpy()), energy, energy_std, energy_std / np.abs(energy), rel_error), end='')
 
             if np.isnan(energy):
                 params = [p.clone() for p in self.model.get_parameters()]
@@ -207,8 +207,8 @@ class Learner:
 
             # Check stopping criterion (including overlap sum near zero)
             if (energy_std / np.abs(energy) < self.stopping_threshold and
-                np.abs(np.std(elocs.cpu().numpy()) / np.mean(elocs.cpu().numpy())) < self.stopping_threshold and
-                    np.abs(np.mean(oloc_sum.cpu().numpy())) <= 0.010):
+                np.abs(np.std(elocs.detach().cpu().numpy()) / np.mean(elocs.detach().cpu().numpy())) < self.stopping_threshold and
+                    np.abs(np.mean(oloc_sum.detach().cpu().numpy())) <= 0.010):
                 print('Stopping criterion reached!')
                 break
 
@@ -413,12 +413,12 @@ class Learner:
         """
         if oloc_sum is not None:
             energy_val = np.real(
-                np.mean(elocs.cpu().numpy() + self.lambda_mul * oloc_sum.cpu().numpy()))
+                np.mean(elocs.detach().cpu().numpy() + self.lambda_mul * oloc_sum.detach().cpu().numpy()))
             energy_std_val = np.real(
-                np.std(elocs.cpu().numpy() + self.lambda_mul * oloc_sum.cpu().numpy()))
+                np.std(elocs.detach().cpu().numpy() + self.lambda_mul * oloc_sum.detach().cpu().numpy()))
         else:
-            energy_val = np.real(np.mean(elocs.cpu().numpy()))
-            energy_std_val = np.real(np.std(elocs.cpu().numpy()))
+            energy_val = np.real(np.mean(elocs.detach().cpu().numpy()))
+            energy_std_val = np.real(np.std(elocs.detach().cpu().numpy()))
         self.energy.append(energy_val)
         self.energy_std.append(energy_std_val)
         energy_window = np.mean(self.energy[-self.window_period:])
@@ -437,7 +437,7 @@ class Learner:
         """
         Calculate observables if any.
         """
-        samples_np = self.samples.cpu().numpy()
+        samples_np = self.samples.detach().cpu().numpy()
         confs, count_ = np.unique(samples_np, axis=0, return_counts=True)
         prob_out = count_ / len(samples_np)
         value_map = {}
@@ -475,7 +475,7 @@ class Learner:
         """
         Print frequency map of configurations (interpreting each sample as a binary string).
         """
-        samples_np = self.samples.cpu().numpy()
+        samples_np = self.samples.detach().cpu().numpy()
         bin_confs = []
         for sample in samples_np:
             conf = [1 if c == 1 else 0 for c in sample]
@@ -495,7 +495,7 @@ class Learner:
         """
         Returns an array of log|Psi| values corresponding to the given samples using a provided mapping.
         """
-        samples_np = samples.cpu().numpy()
+        samples_np = samples.detach().cpu().numpy()
         log_psi_values = []
         for sample in samples_np:
             conf = [1 if c == 1 else 0 for c in sample]

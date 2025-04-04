@@ -136,7 +136,7 @@ class LearnerSupervised:
         """
         # Get the probability $|\Psi(x)|^2$ from samples
         confs, count_ = np.unique(
-            self.samples.cpu().numpy(), axis=0, return_counts=True)
+            self.samples.detach().cpu().numpy(), axis=0, return_counts=True)
         prob_out = count_ / len(self.samples)
 
         # Calculate each observables
