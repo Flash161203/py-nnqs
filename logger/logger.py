@@ -179,7 +179,8 @@ class Logger(object):
         learner.samples_observ = new_samples
 
         # Calculate new energy with new samples
-        new_energy = np.real(learner.get_local_energy(new_samples))
+        new_energy = np.real(learner.get_local_energy(
+            new_samples).detach().cpu().numpy())
         learner.energy_observ = new_energy
 
         filename = 'energy_observ.txt'
