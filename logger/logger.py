@@ -221,8 +221,8 @@ class Logger(object):
                   (str(learner.hamiltonian), str(learner.model)))
         plt.ylabel('Energy')
         plt.xlabel('Iteration num')
-        ground_energy = np.array(learner.ground_energy)
-        ground_energy_std = np.array(learner.ground_energy_std)
+        ground_energy = np.array(learner.energy)
+        ground_energy_std = np.array(learner.energy_std)
         plt.plot(range(len(ground_energy)), ground_energy, label='energy')
         plt.fill_between(range(len(ground_energy)), ground_energy - ground_energy_std,
                          ground_energy + ground_energy_std, alpha=0.4, color='red')
@@ -241,8 +241,8 @@ class Logger(object):
         Args:
             learner: the learner object
         """
-        ground_energys = learner.ground_energy
-        ground_energy_stds = learner.ground_energy_std
+        ground_energys = learner.energy
+        ground_energy_stds = learner.energy_std
         energy_windows = learner.energy_windows
         energy_windows_std = learner.energy_windows_std
         rel_errors = learner.rel_errors
