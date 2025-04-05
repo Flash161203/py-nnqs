@@ -153,7 +153,7 @@ class RBMComplex(RBM):
         This is equals to the sum of the mean squared difference of all parameters (weights and biases)
         """
         sum_diff = 0.
-        for (par1, par2) in zip(first_param, last_param):
+        for (par1, par2) in zip(first_param[1], last_param[1]):
             sum_diff += np.mean(np.abs(par1 - par2) ** 2)
 
         return sum_diff
