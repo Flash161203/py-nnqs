@@ -24,7 +24,7 @@ class MLPRealPos(MLP):
         activation_hidden = tanh
     """
 
-    def __init__(self, num_visible, num_hidden=[256], activation_hidden='ReLU', activation_output=None, num_expe=None, use_bias=True, freeze_layer=[], freeze_pos=None):
+    def __init__(self, num_visible, num_hidden=[256], activation_hidden='ReLU', activation_output='Sigmoid', num_expe=None, use_bias=True, freeze_layer=[], freeze_pos=None):
         """
         Construct a multilayer perceptron model for real positive wavefunction.
 
