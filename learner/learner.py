@@ -136,7 +136,7 @@ class Learner:
 
             # 3. Apply gradients using PyTorch optimizer
             self.optimizer.zero_grad()
-            for g, p in zip(grads, self.model.trainable_weights):
+            for g, p in zip(grads, self.model.model.parameters()):
                 p.grad = g
             self.optimizer.step()
 
@@ -220,7 +220,7 @@ class Learner:
             grads = self.get_gradient_excited(
                 prior_models, prior_samples, self.minibatch_size, eloc=elocs)
             self.optimizer.zero_grad()
-            for g, p in zip(grads, self.model.trainable_weights):
+            for g, p in zip(grads, self.model.model.parameters()):
                 p.grad = g
             self.optimizer.step()
 

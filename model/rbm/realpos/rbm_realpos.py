@@ -73,6 +73,12 @@ class RBMRealPos(RBM):
         self.model = self
         self.trainable_weights = [self.W, self.bv, self.bh]
 
+    def parameters(self):
+        """
+        Get the parameters of the model
+        """
+        return self.trainable_weights
+
     def log_val(self, x):
         """
             Calculate log(\Psi(x)) = 0.5 * (ax + \sum_{j=1}^H log(cosh(Wx + b)))
