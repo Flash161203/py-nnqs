@@ -191,7 +191,7 @@ class Learner:
                 epoch, np.mean(oloc_sum.detach().cpu().numpy()), energy, energy_std, energy_std / np.abs(energy), rel_error), end='')
 
             if np.isnan(energy):
-                params = [p.clone() for p in self.model.get_parameters()]
+                params = [np.copy(p) for p in self.model.get_parameters()]
                 for div in np.arange(1.1, 5.0, 0.1):
                     print("Retrying dividing weights by %.1f" % div)
                     self.model.set_parameters([p / div for p in params])
