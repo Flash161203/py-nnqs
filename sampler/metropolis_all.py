@@ -33,9 +33,9 @@ class MetropolisAll(Sampler):
             num_samples = self.num_samples
 
         init_data = torch.randint(
-            0, 2, (num_samples, sample_size), dtype=torch.int32)
+            0, 2, (num_samples, sample_size), dtype=torch.int64)
         init_data = torch.where(init_data == 0, torch.tensor(-1,
-                                dtype=torch.int32), torch.tensor(1, dtype=torch.int32))
+                                dtype=torch.int64), torch.tensor(1, dtype=torch.int64))
 
         return init_data.float()
 
@@ -84,9 +84,9 @@ class MetropolisAll(Sampler):
                 new samples with a randomly flipped spin
         """
         new_sample = torch.randint(
-            0, 2, sample.shape, dtype=torch.int32, device=sample.device)
+            0, 2, sample.shape, dtype=torch.int64, device=sample.device)
 
-        return torch.where(new_sample == 0, torch.tensor(-1, dtype=torch.int32, device=sample.device), new_sample).float()
+        return torch.where(new_sample == 0, torch.tensor(-1, dtype=torch.int64, device=sample.device), new_sample).float()
 
     def get_all_samples(self, model, initial_sample, num_samples):
         all_samples = []

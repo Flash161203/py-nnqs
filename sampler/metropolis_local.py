@@ -33,7 +33,7 @@ class MetropolisLocal(Sampler):
             num_samples = self.num_samples
 
         init_data = torch.randint(
-            0, 2, (num_samples, sample_size), dtype=torch.int32)
+            0, 2, (num_samples, sample_size), dtype=torch.int64)
         init_data = torch.where(init_data == 0, -1, 1)
 
         return init_data.float()
@@ -102,7 +102,7 @@ class MetropolisLocal(Sampler):
 
         row_indices = torch.arange(num_samples).unsqueeze(1)
         col_indices = torch.randint(
-            0, num_points, (num_samples, 1), dtype=torch.int32)
+            0, num_points, (num_samples, 1), dtype=torch.int64)
         indices = torch.cat([row_indices, col_indices], 1)
 
         elements = sample.gather(1, col_indices)

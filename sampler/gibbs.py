@@ -34,7 +34,7 @@ class Gibbs(Sampler):
             num_samples = self.num_samples
 
         init_data = torch.randint(
-            0, 2, (num_samples, sample_size), dtype=torch.int32)
+            0, 2, (num_samples, sample_size), dtype=torch.int64)
         init_data = torch.where(init_data == 0, -1, 1)
 
         return init_data.float()
