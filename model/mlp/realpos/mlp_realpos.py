@@ -138,31 +138,36 @@ class MLPRealPos(MLP):
     '''
 
     def derlog(self, x):
-        """
-            Calculate $D_{W}(x) = D_{W} = (1 / \Psi(x)) * (d \Psi(x) / dW) = d \log \Psi(x) / dW$ where W can be the weights or the biases.
-        """
-        # Create accumulators for gradients for each parameter.
-        grads_accum = [torch.zeros_like(param)
-                       for param in self.model.parameters()]
-        n = x.shape[0]
-
-        # Loop over each sample individually.
-        for i in range(n):
-            xi = x[i:i+1]  # Keep batch dimension for a single sample.
-            # This is a scalar in a 1x1 tensor.
-            output = torch.exp(self.log_val(xi))
-            # Clear any previously stored gradients.
+        # x is assumed to have shape (sample_size, num_visible)
+        sample_size = x.shape[0]
+        # Initialize a list of tensors to hold per-sample gradients for each parameter.
+        per_sample_grads = [
+            torch.zeros((sample_size,) + param.shape,
+                        dtype=torch.float32, device=x.device)
+            for param in self.model.parameters()
+        ]
+        # Loop over each sample to compute its gradient
+        for i in range(sample_size):
             self.model.zero_grad()
-            # Backpropagate for the individual sample.
+            xi = x[i: i + 1]  # Keep the batch dimension (1, num_visible)
+            # Compute the output; note that log_val should track gradients.
+            output = torch.exp(self.log_val(xi))
+            # Backpropagate the gradient for this single sample.
             output.backward(torch.ones_like(output))
-            # Now, for each parameter, the grad is for the sample xi.
+            # For each parameter, store its per-sample gradient normalized by the output.
             for idx, param in enumerate(self.model.parameters()):
-                # Normalize by the output (a scalar) and accumulate.
-                grads_accum[idx] += param.grad / output.item()
-
-        # Average the accumulated gradients over all samples.
-        grads_new = [g / n for g in grads_accum]
-        return grads_new
+                grad_val = param.grad / output.item()  # Normalize by the scalar output
+                # Apply freezing conditions if needed.
+                if idx in self.freeze_layer:
+                    grad_val = grad_val * 0.0
+                if idx == 0 and self.freeze_pos is not None:
+                    grad_np = grad_val.detach().cpu().numpy()
+                    grad_np[self.freeze_pos] = 0.0
+                    grad_val = torch.tensor(grad_np, device=x.device)
+                per_sample_grads[idx][i] = grad_val.clone()
+        # Optionally, reshape each per-sample gradient tensor to (sample_size, -1)
+        # per_sample_grads = [g.view(sample_size, -1) for g in per_sample_grads]
+        return per_sample_grads
 
     def get_parameters(self):
         """
