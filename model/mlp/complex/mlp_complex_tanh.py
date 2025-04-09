@@ -76,6 +76,12 @@ class MLPComplexTanh(MLP):
             self.b2_array, dtype=torch.complex64))
         self.trainable_weights = [self.W1, self.b1, self.W2, self.b2]
 
+    def parameters(self):
+        """
+        Get the parameters of the model
+        """
+        return self.trainable_weights
+
     def log_val(self, x):
         """
             Calculate log(\Psi(x))
