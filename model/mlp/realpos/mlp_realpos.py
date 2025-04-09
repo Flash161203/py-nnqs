@@ -88,6 +88,14 @@ class MLPRealPos(MLP):
             Args:
                 x: the input x
         """
+        return torch.log(self.model(x))
+
+    def eval_log_val(self, x):
+        """
+            Evaluate log(\Psi(x)) without gradient tracking.
+            Args:
+                x: the input x
+        """
         with torch.no_grad():
             return torch.log(self.model(x))
 
