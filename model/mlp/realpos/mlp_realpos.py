@@ -106,8 +106,8 @@ class MLPRealPos(MLP):
                 xprime: x'
                 x: x
         """
-        log_val_1 = self.log_val(xprime)
-        log_val_2 = self.log_val(x)
+        log_val_1 = self.eval_log_val(xprime)
+        log_val_2 = self.eval_log_val(x)
         return log_val_1 - log_val_2
 
     '''
