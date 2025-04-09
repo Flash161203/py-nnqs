@@ -110,6 +110,7 @@ class MLPRealPos(MLP):
         log_val_2 = self.log_val(x)
         return log_val_1 - log_val_2
 
+    '''
     def derlog(self, x):
         """
             Calculate $D_{W}(x) = D_{W} = (1 / \Psi(x)) * (d \Psi(x) / dW) = d \log \Psi(x) / dW$ where W can be the weights or the biases.
@@ -134,6 +135,34 @@ class MLPRealPos(MLP):
             gradients_new.append(grad)
 
         return gradients_new
+    '''
+
+    def derlog(self, x):
+        """
+            Calculate $D_{W}(x) = D_{W} = (1 / \Psi(x)) * (d \Psi(x) / dW) = d \log \Psi(x) / dW$ where W can be the weights or the biases.
+        """
+        # Create accumulators for gradients for each parameter.
+        grads_accum = [torch.zeros_like(param)
+                       for param in self.model.parameters()]
+        n = x.shape[0]
+
+        # Loop over each sample individually.
+        for i in range(n):
+            xi = x[i:i+1]  # Keep batch dimension for a single sample.
+            # This is a scalar in a 1x1 tensor.
+            output = torch.exp(self.log_val(xi))
+            # Clear any previously stored gradients.
+            self.model.zero_grad()
+            # Backpropagate for the individual sample.
+            output.backward(torch.ones_like(output))
+            # Now, for each parameter, the grad is for the sample xi.
+            for idx, param in enumerate(self.model.parameters()):
+                # Normalize by the output (a scalar) and accumulate.
+                grads_accum[idx] += param.grad / output.item()
+
+        # Average the accumulated gradients over all samples.
+        grads_new = [g / n for g in grads_accum]
+        return grads_new
 
     def get_parameters(self):
         """
