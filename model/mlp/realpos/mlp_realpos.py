@@ -43,9 +43,9 @@ class MLPRealPos(MLP):
 
         super().__init__(num_visible, num_hidden)
         self.activation_hidden = getattr(
-            nn, activation_hidden.capitalize())() if activation_hidden else None
+            nn, activation_hidden)() if activation_hidden else None
         self.activation_output = getattr(
-            nn, activation_output.capitalize())() if activation_output else None
+            nn, activation_output)() if activation_output else None
         self.use_bias = use_bias
         self.freeze_layer = freeze_layer
         self.num_expe = num_expe

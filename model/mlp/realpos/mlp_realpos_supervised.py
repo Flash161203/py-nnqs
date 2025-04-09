@@ -16,7 +16,7 @@ class MLPRealPosSupervised(MLP):
     wavefunction. 
     """
 
-    def __init__(self, num_visible, num_hidden=[256], activation_hidden='tanh', activation_output=None, num_expe=None, use_bias=True, freeze_layer=[]):
+    def __init__(self, num_visible, num_hidden=[256], activation_hidden='Tanh', activation_output=None, num_expe=None, use_bias=True, freeze_layer=[]):
         """
         Construct an multilayer perceptron model for real positive wavefunction.
 
@@ -35,8 +35,15 @@ class MLPRealPosSupervised(MLP):
 
         super().__init__(num_visible, num_hidden)
         self.num_expe = num_expe
-        self.activation_hidden = activation_hidden
-        self.activation_output = activation_output
+
+        # self.activation_hidden = activation_hidden
+        # self.activation_output = activation_output
+
+        self.activation_hidden = getattr(
+            nn, activation_hidden)() if activation_hidden else None
+        self.activation_output = getattr(
+            nn, activation_output)() if activation_output else None
+
         self.use_bias = use_bias
         self.freeze_layer = freeze_layer
         self.num_expe = num_expe
