@@ -74,6 +74,8 @@ class MLPComplexTanh(MLP):
             self.W2_array, dtype=torch.complex64))
         self.b2 = nn.Parameter(torch.tensor(
             self.b2_array, dtype=torch.complex64))
+
+        self.model = self
         self.trainable_weights = [self.W1, self.b1, self.W2, self.b2]
 
     def parameters(self):
